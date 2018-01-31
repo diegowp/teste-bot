@@ -22,7 +22,7 @@ var inMemoryStorage = new builder.MemoryBotStorage();
 // Recive messages from teh user and respond by echoing each message back ( prefixed with 'You said: ' )
 var bot = new builder.UniversalBot( connector, [
     function(session){
-        session.send( "E ai manolo! Vou o cara da pizza, tu vai querer o que hoje?" );
+        session.send( "E ai manolo! Sou o cara da pizza, tu vai querer o que hoje?" );
         builder.Prompts.choice( session, "Escolhe a porcaria do sabor jão!", "Mussarela|Tomate|Não quero nada", { listStyle: 2 } );
     },
     function( session, results ){
@@ -31,11 +31,8 @@ var bot = new builder.UniversalBot( connector, [
     },
     function( session, results ){
 
-        console.log( results );
-
         if( results.response ){
-            session.send( "Fecho irmão, é nóiz, logo menos ta na tua casa!" );
-            session.send( "Vlw, Flw" );
+            session.send( "Fecho irmão, é nóiz, logo menos ta na tua casa! <br/>Vlw <br/>Flw" );
             session.endDialog();
         }else{
             session.send( "Então vai ver se estou na esquina irmão, vai se lascar!" );
