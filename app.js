@@ -26,18 +26,18 @@ var bot = new builder.UniversalBot( connector, [
         builder.Prompts.choice( session, "Escolhe a porcaria do sabor jão!", "Mussarela|Tomate|Não quero nada", { listStyle: 2 } );
     },
     function( session, results ){
-        console.log( results );
         session.dialogData.pizza = results.response.entity;
-        builder.Prompts.text( session, "Tu tem certeza que vai querer " + results.response.entity + "? ( s / n ) " );
+        builder.Prompts.confirm( session, "Tu tem certeza que vai querer " + results.response.entity + "? ( yes / no )" );
     },
     function( session, results ){
 
-        if( results.response == "s" ){
+        console.log( results );
+
+        if( results.response ){
             session.send( "Fecho irmão, é nóiz, logo menos ta na tua casa!" );
             session.send( "Vlw, Flw" );
             session.endDialog();
-        }
-        if( results.response == "n" ){
+        }else{
             session.send( "Então vai ver se estou na esquina irmão, vai se lascar!" );
             session.endDialog();
         }
