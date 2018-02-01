@@ -1,0 +1,23 @@
+[
+  {
+    "image": "http://www.ocladapizza.com.br/wp-content/uploads/2017/02/conhe%C3%A7a-7-sabores-de-pizza-mais-consumidos-na-italia-blog-pizzaria-o-cla-da-pizza.jpg",
+    "name": "Mussarela",
+    "ingredients": "Meia tonelada de tomate, 10 gramas de queijo, vários ovo",
+    "price": "R$ 10,00",
+    "able": true
+  },
+  {
+    "image": "http://www.ocladapizza.com.br/wp-content/uploads/2017/02/conhe%C3%A7a-7-sabores-de-pizza-mais-consumidos-na-italia-blog-pizzaria-o-cla-da-pizza.jpg",
+    "name": "Mussarela com Queijo",
+    "ingredients": "Meia tonelada de tomate, 10 gramas de queijo, vários ovo",
+    "price": "R$ 20,00",
+    "able": true
+  },
+  {
+    "image": "http://www.ocladapizza.com.br/wp-content/uploads/2017/02/conhe%C3%A7a-7-sabores-de-pizza-mais-consumidos-na-italia-blog-pizzaria-o-cla-da-pizza.jpg",
+    "name": "Queijo com Mussarela",
+    "ingredients": "Meia tonelada de tomate, 10 gramas de queijo, vários ovo",
+    "price": "R$ 100,00",
+    "able": true
+  }
+]

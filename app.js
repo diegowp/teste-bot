@@ -1,6 +1,7 @@
 var restify = require('restify');
 var builder = require('botbuilder');
 var buscaCep = require('busca-cep');
+var http = require('request');
 
 // Setup Restify Server
 var server = restify.createServer();
@@ -39,10 +40,10 @@ bot.dialog( "init", [
     // check response
     function( session, results ){
         if( results.response.entity === "Sim" ){
-            session.beginDialog( "login" );
+            session.replaceDialog( "menu" );
         }
         if( results.response.entity === "Não" ){
-            session.beginDialog( "singup" );
+            session.replaceDialog( "singup" );
         }
     }
 
@@ -69,9 +70,9 @@ bot.dialog( "login", [
     // check try again
     function( session, results ){
         if( results.response ){
-            session.beginDialog( "login" );
+            session.replaceDialog( "login" );
         }else{
-            session.endDialog( "Ok! Obrigado, até a próxima =)" );
+            session.endConversation( "Ok! Obrigado, até a próxima =)" );
         }
     }
 
@@ -145,10 +146,58 @@ bot.dialog( "singup", [
     function( session, results ){
         if( results.response ){
             session.send( `Ok ${session.dialogData.profile.name}, vamos ao cardápio agora!` );
-            session.endDialog();
+            session.replaceDialog( "menu" );
         }else{
-            session.endDialog( "Fodeu!" );
+            session.endConversation( "Fodeu!" );
         }
+    }
+
+]);
+
+function createHeroCard( session, name, ingredients, price, image ){
+
+    return new builder.HeroCard( session )
+        .title( name )
+        .subtitle( ingredients )
+        .text( price )
+        .images( [
+            builder.CardImage.create( session, image )
+        ])
+        .buttons([
+            builder.CardAction.imBack( session, "teste1", "Adicionar" )
+        ]);
+
+}
+
+bot.dialog( "teste1", function ( session ) {
+        console.log( "ta rolando =====================" );
+        session.endConversation( "e aew jão" );
+}).triggerAction({
+    matches: /ˆteste1$/i
+});
+
+bot.dialog( "menu", [
+
+    function( session ){
+
+        http( 'http://localhost:8888/bot/menu.json', function( error, response, body ){
+
+            var items = JSON.parse( body ),
+                i = 0;
+
+            var temp = new builder.Message( session );
+            temp.attachmentLayout( builder.AttachmentLayout.carousel );
+
+            for( i; i < items.length; i++ ){
+
+                temp.addAttachment( createHeroCard( session, items[i].name, items[i].ingredients, items[i].price, items[i].image ) );
+
+            }
+
+            session.endDialog( temp );
+
+        });
+
     }
 
 ]);
